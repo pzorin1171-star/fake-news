@@ -12,41 +12,33 @@
             min-height: 100vh;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-        
         .card {
             border-radius: 15px;
             box-shadow: 0 10px 20px rgba(0,0,0,0.1);
         }
-        
         .highlight {
             padding: 2px 6px;
             border-radius: 4px;
             font-weight: bold;
-            margin: 0 1px;
         }
-        
         .clickbait { background-color: #ffcccc; color: #cc0000; }
         .certainty { background-color: #fff0cc; color: #b35900; }
         .source { background-color: #d4edda; color: #155724; }
         .number { background-color: #d1ecf1; color: #0c5460; font-weight: bold; }
         .exclamation { background-color: #ffebcc; color: #e68a00; }
-        
         .score-display {
             font-size: 4rem;
             font-weight: 800;
             text-shadow: 3px 3px 6px rgba(0,0,0,0.2);
         }
-        
         textarea {
             min-height: 200px;
             resize: vertical;
         }
-        
         .badge-lg {
             font-size: 1.1rem;
             padding: 8px 16px;
         }
-        
         .trust-meter {
             height: 10px;
             border-radius: 5px;
@@ -54,7 +46,6 @@
             margin: 20px 0;
             position: relative;
         }
-        
         .trust-indicator {
             position: absolute;
             top: -5px;
@@ -85,9 +76,7 @@
                         <textarea id="textInput" class="form-control form-control-lg" 
                                   placeholder="Вставьте текст новости или статьи для проверки..."
                                   rows="6"></textarea>
-                        <div class="form-text mt-2">
-                            Совет: Используйте примеры ниже или вставьте любой текст
-                        </div>
+                        <div class="form-text mt-2">Совет: Используйте примеры ниже или вставьте любой текст</div>
                     </div>
                     
                     <div class="row mb-4">
@@ -115,9 +104,7 @@
                                     <div class="row">
                                         <div class="col-md-6 mb-3">
                                             <div class="card h-100 border-danger">
-                                                <div class="card-header bg-danger text-white">
-                                                    Фейковая новость
-                                                </div>
+                                                <div class="card-header bg-danger text-white">Фейковая новость</div>
                                                 <div class="card-body">
                                                     <p>ШОК! Ученые скрывают ПРАВДУ о вакцинах! Все врачи в УЖАСЕ! АБСОЛЮТНО точно доказано!</p>
                                                     <button class="btn btn-sm btn-outline-danger" onclick="useExample(this)">Использовать</button>
@@ -126,9 +113,7 @@
                                         </div>
                                         <div class="col-md-6 mb-3">
                                             <div class="card h-100 border-success">
-                                                <div class="card-header bg-success text-white">
-                                                    Настоящая новость
-                                                </div>
+                                                <div class="card-header bg-success text-white">Настоящая новость</div>
                                                 <div class="card-body">
                                                     <p>Центробанк сообщил об инфляции 4.2% за прошлый месяц. По данным экспертов, показатель соответствует прогнозам.</p>
                                                     <button class="btn btn-sm btn-outline-success" onclick="useExample(this)">Использовать</button>
@@ -150,12 +135,8 @@
                         <div class="row mb-5">
                             <div class="col-md-8">
                                 <div class="card h-100">
-                                    <div class="card-header bg-light">
-                                        <h5 class="mb-0">📋 Результаты анализа</h5>
-                                    </div>
-                                    <div class="card-body">
-                                        <div id="explanations"></div>
-                                    </div>
+                                    <div class="card-header bg-light"><h5 class="mb-0">📋 Результаты анализа</h5></div>
+                                    <div class="card-body"><div id="explanations"></div></div>
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -184,19 +165,13 @@
                         <div class="row mb-5">
                             <div class="col-lg-6">
                                 <div class="card h-100">
-                                    <div class="card-header bg-light">
-                                        <h5 class="mb-0">📊 Анализ признаков</h5>
-                                    </div>
-                                    <div class="card-body">
-                                        <canvas id="radarChart"></canvas>
-                                    </div>
+                                    <div class="card-header bg-light"><h5 class="mb-0">📊 Анализ признаков</h5></div>
+                                    <div class="card-body"><canvas id="radarChart"></canvas></div>
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="card h-100">
-                                    <div class="card-header bg-light">
-                                        <h5 class="mb-0">🔍 Анализ текста</h5>
-                                    </div>
+                                    <div class="card-header bg-light"><h5 class="mb-0">🔍 Анализ текста</h5></div>
                                     <div class="card-body">
                                         <div id="highlightedText" class="p-3 border rounded" style="height: 300px; overflow-y: auto; font-size: 1.1rem; line-height: 1.6;"></div>
                                         <div class="mt-3">
@@ -222,7 +197,7 @@
                             <ul>
                                 <li><strong>Rule-based анализ</strong> - поиск стилистических маркеров</li>
                                 <li><strong>Эмоциональность</strong> - анализ тональности текста</li>
-                                <li><strong>Кликбейт-слова</strong> - поиск слов для привлечения внимания</li>
+                                <li><strong>Кликбейт-слова</strong> - слова для привлечения внимания</li>
                                 <li><strong>Категоричность</strong> - слишком уверенные утверждения</li>
                             </ul>
                         </div>
@@ -300,23 +275,19 @@
         function updateUI(data) {
             document.getElementById('results').classList.remove('d-none');
             
-            // Общий балл
             const score = data.reliability_score;
             const scoreElement = document.getElementById('scoreDisplay');
             const scoreCard = document.getElementById('scoreCard');
             const verdictElement = document.getElementById('verdict');
             const trustIndicator = document.getElementById('trustIndicator');
             
-            // Анимация счетчика
             animateCounter(scoreElement, 0, score, 1000);
             trustIndicator.style.left = score + '%';
             
-            // Обновляем дополнительные данные
             document.getElementById('fakeScore').textContent = data.fake_score + '%';
             document.getElementById('wordCount').textContent = data.details.word_count;
             document.getElementById('sentenceCount').textContent = data.details.sentence_count;
             
-            // Определение вердикта
             let verdictText, verdictClass;
             
             if (score >= 75) {
@@ -336,7 +307,6 @@
             verdictElement.textContent = verdictText;
             verdictElement.className = verdictClass;
             
-            // Объяснения
             const explanationsElement = document.getElementById('explanations');
             if (data.explanations && data.explanations.length > 0) {
                 let html = '';
@@ -352,10 +322,7 @@
                 explanationsElement.innerHTML = html;
             }
             
-            // Подсвеченный текст
             document.getElementById('highlightedText').innerHTML = data.highlighted_text;
-            
-            // Диаграмма
             updateRadarChart(data.metrics);
         }
         
@@ -400,16 +367,13 @@
                         r: {
                             suggestedMin: 0,
                             suggestedMax: 100,
-                            ticks: {
-                                stepSize: 20
-                            }
+                            ticks: { stepSize: 20 }
                         }
                     }
                 }
             });
         }
         
-        // Ctrl+Enter для быстрого анализа
         document.getElementById('textInput').addEventListener('keydown', function(e) {
             if (e.ctrlKey && e.key === 'Enter') {
                 e.preventDefault();
