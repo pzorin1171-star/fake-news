@@ -1,26 +1,40 @@
 from flask import Flask, render_template, request, jsonify
 from style_analyzer import StyleAnalyzer
-import json
+import os
+import logging
 
 app = Flask(__name__)
+
+# Настройка логирования
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
+# Инициализация анализатора
 analyzer = StyleAnalyzer()
 
-# Загружаем и обучаем модель при запуске
-try:
-    analyzer.load_or_train_model()
-    print("✅ Детектор фейковых новостей успешно инициализирован")
-    print(f"📊 Точность модели: {analyzer.model_accuracy:.2%}")
-except Exception as e:
-    print(f"❌ Ошибка при инициализации модели: {e}")
+@app.before_first_request
+def initialize_model():
+    """Инициализация модели при первом запросе"""
+    try:
+        # Создаем папку models если её нет
+        if not os.path.exists('models'):
+            os.makedirs('models', exist_ok=True)
+            logger.info("📁 Создана папка models/")
+        
+        # Загружаем или обучаем модель
+        analyzer.load_or_train_model()
+        logger.info(f"✅ Модель инициализирована. Точность: {analyzer.model_accuracy:.2%}")
+    except Exception as e:
+        logger.error(f"❌ Ошибка инициализации модели: {e}")
 
 @app.route('/')
 def index():
-    """Главная страница с формой ввода"""
+    """Главная страница"""
     return render_template('index.html')
 
 @app.route('/analyze', methods=['POST'])
 def analyze_text():
-    """Анализ текста и возврат результатов"""
+    """Анализ текста"""
     try:
         data = request.get_json()
         text = data.get('text', '').strip()
@@ -29,16 +43,21 @@ def analyze_text():
             return jsonify({'error': 'Введите текст для анализа'})
         
         if len(text) < 20:
-            return jsonify({'error': 'Текст слишком короткий. Введите не менее 20 символов.'})
+            return jsonify({'error': 'Текст слишком короткий (минимум 20 символов)'})
         
-        if len(text) > 10000:
-            return jsonify({'error': 'Текст слишком длинный. Максимум 10000 символов.'})
+        if len(text) > 5000:
+            return jsonify({'error': 'Текст слишком длинный (максимум 5000 символов)'})
         
-        # Анализ текста
+        # Проверяем, готова ли модель
+        if analyzer.model is None:
+            return jsonify({'error': 'Модель еще загружается. Пожалуйста, подождите...'})
+        
+        # Анализ
         features = analyzer.extract_features(text)
         prediction = analyzer.predict(features)
         highlighted_text = analyzer.highlight_text(text)
-        credibility_assessment = analyzer.assess_credibility(features, text)
+        reliability_score = analyzer.calculate_reliability_score(features, prediction, text)
+        explanations = analyzer.generate_explanations(features, text)
         
         # Подготовка данных для визуализации
         visualization_data = {
@@ -50,72 +69,38 @@ def analyze_text():
             'balance_score': round(features['balance_score'] * 100),
         }
         
-        # Расчет общего балла достоверности с учетом контекста
-        reliability_score = analyzer.calculate_reliability_score(features, prediction, text)
-        
-        # Объяснение результатов
-        explanations = analyzer.generate_explanations(features, text)
-        
-        # Статистика по тексту
-        text_stats = {
-            'length': len(text),
-            'sentences': features.get('sentence_count', 0),
-            'words': features.get('word_count', 0),
-            'avg_sentence_length': round(features.get('avg_words_per_sentence', 0), 1)
-        }
-        
         result = {
             'success': True,
             'reliability_score': reliability_score,
             'is_fake': prediction['is_fake'],
             'fake_probability': round(prediction['fake_probability'] * 100, 1),
-            'raw_fake_probability': round(prediction.get('raw_probability', 0) * 100, 1),
             'highlighted_text': highlighted_text,
             'features': features,
             'visualization_data': visualization_data,
             'explanations': explanations,
-            'clickbait_words': features.get('clickbait_words', []),
-            'certainty_words': features.get('certainty_words', []),
-            'credibility_assessment': credibility_assessment,
-            'text_stats': text_stats,
-            'model_confidence': round(analyzer.model_accuracy * 100, 1)
+            'model_accuracy': round(analyzer.model_accuracy * 100, 1),
+            'text_stats': {
+                'length': len(text),
+                'sentences': features.get('sentence_count', 0),
+                'words': features.get('word_count', 0),
+            }
         }
         
         return jsonify(result)
         
     except Exception as e:
-        app.logger.error(f"Ошибка анализа: {str(e)}")
-        return jsonify({'error': f'Внутренняя ошибка сервера: {str(e)}'})
+        logger.error(f"Ошибка анализа: {e}")
+        return jsonify({'error': 'Внутренняя ошибка сервера'})
 
-@app.route('/features', methods=['GET'])
-def get_feature_info():
-    """Возвращает информацию о признаках для обучения"""
-    features_info = {
-        'features': [
-            {'name': 'Кликбейт', 'description': 'Наличие слов, привлекающих внимание'},
-            {'name': 'Эмоциональность', 'description': 'Сила эмоциональной окраски текста'},
-            {'name': 'Категоричность', 'description': 'Степень уверенности в утверждениях'},
-            {'name': 'Формальность', 'description': 'Официальность стиля изложения'},
-            {'name': 'Источники', 'description': 'Упоминание источников информации'},
-            {'name': 'Баланс', 'description': 'Сбалансированность изложения'}
-        ],
-        'model_info': {
-            'name': 'Градиентный бустинг (Gradient Boosting)',
-            'features_count': 15,
-            'samples_trained': 1000,
-            'accuracy': round(analyzer.model_accuracy * 100, 1)
-        }
-    }
-    return jsonify(features_info)
-
-@app.route('/api/health', methods=['GET'])
+@app.route('/health')
 def health_check():
-    """Проверка работоспособности сервиса"""
+    """Проверка здоровья сервиса"""
     return jsonify({
         'status': 'ok',
         'model_loaded': analyzer.model is not None,
-        'model_accuracy': analyzer.model_accuracy if hasattr(analyzer, 'model_accuracy') else 0
+        'model_accuracy': analyzer.model_accuracy
     })
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port)
