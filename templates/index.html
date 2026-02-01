@@ -3,106 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Детектор фейковых новостей | Анализ стилистических признаков</title>
+    <title>Детектор фейковых новостей</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <style>
-        :root {
-            --real-color: #28a745;
-            --fake-color: #dc3545;
-            --warning-color: #ffc107;
-        }
-        
         body {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
-        .glass-card {
-            background: rgba(255, 255, 255, 0.98);
-            border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        .card {
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
         }
-        
-        .result-card {
-            border-width: 4px;
-            transition: all 0.5s ease;
-        }
-        
-        .result-real { border-color: var(--real-color) !important; }
-        .result-fake { border-color: var(--fake-color) !important; }
-        .result-questionable { border-color: var(--warning-color) !important; }
         
         .highlight {
             padding: 2px 6px;
             border-radius: 4px;
             font-weight: bold;
-            margin: 0 1px;
         }
         
         .clickbait { background-color: #ffcccc; color: #cc0000; }
         .certainty { background-color: #fff0cc; color: #b35900; }
         .source { background-color: #d4edda; color: #155724; }
-        .number { background-color: #d1ecf1; color: #0c5460; font-weight: bold; }
-        .exclamation { background-color: #ffebcc; color: #e68a00; }
+        .number { background-color: #d1ecf1; color: #0c5460; }
         
         .score-display {
-            font-size: 4rem;
+            font-size: 3.5rem;
             font-weight: 800;
-            text-shadow: 3px 3px 6px rgba(0,0,0,0.2);
-        }
-        
-        .model-badge {
-            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
-            color: white;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-        }
-        
-        .trust-meter {
-            height: 10px;
-            border-radius: 5px;
-            background: linear-gradient(90deg, #dc3545 0%, #ffc107 50%, #28a745 100%);
-            margin: 20px 0;
-            position: relative;
-        }
-        
-        .trust-indicator {
-            position: absolute;
-            top: -5px;
-            width: 10px;
-            height: 20px;
-            background: #333;
-            border-radius: 5px;
-            transform: translateX(-50%);
-        }
-        
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .result-card {
-            animation: slideIn 0.5s ease-out;
         }
         
         textarea {
             min-height: 200px;
             resize: vertical;
-        }
-        
-        .btn-analyze {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border: none;
-            color: white;
-            padding: 12px 30px;
-            font-size: 1.2rem;
-            font-weight: 600;
         }
     </style>
 </head>
@@ -110,146 +44,89 @@
     <div class="container py-5">
         <div class="row justify-content-center">
             <div class="col-lg-10">
-                <!-- Заголовок -->
                 <div class="text-center mb-5">
-                    <h1 class="display-5 fw-bold text-white mb-3">
-                        <i class="bi bi-shield-check"></i> Детектор фейковых новостей
-                    </h1>
-                    <p class="lead text-white mb-4">Анализ текста по стилистическим признакам</p>
-                    <div class="d-flex flex-wrap justify-content-center gap-3">
-                        <span class="model-badge">
-                            <i class="bi bi-cpu"></i> Gradient Boosting
-                        </span>
-                        <span class="model-badge">
-                            <i class="bi bi-graph-up"></i> ML + Rule-based
-                        </span>
-                        <span id="modelAccuracyBadge" class="model-badge">
-                            <i class="bi bi-check-circle"></i> Точность: --
-                        </span>
-                    </div>
+                    <h1 class="display-5 fw-bold text-white mb-3">🔍 Детектор фейковых новостей</h1>
+                    <p class="lead text-white">Анализ текста по стилистическим признакам</p>
                 </div>
 
-                <!-- Основная карточка -->
-                <div class="glass-card p-4 p-md-5 mb-5">
-                    <h3 class="mb-4"><i class="bi bi-pencil-square"></i> Введите текст для анализа</h3>
+                <div class="card p-4 p-md-5 mb-5">
+                    <h3 class="mb-4">📝 Введите текст для анализа</h3>
                     
                     <div class="mb-4">
-                        <textarea 
-                            id="textInput" 
-                            class="form-control form-control-lg" 
-                            placeholder="Вставьте текст новости или статьи..."
-                            rows="6"
-                        ></textarea>
-                        <div class="form-text">
-                            <i class="bi bi-info-circle"></i> Примеры ниже
-                        </div>
+                        <textarea id="textInput" class="form-control" placeholder="Вставьте текст новости или статьи..." rows="6"></textarea>
                     </div>
                     
                     <div class="row mb-4">
-                        <div class="col-md-8">
-                            <button id="analyzeBtn" class="btn btn-analyze w-100" onclick="analyzeText()">
-                                <i class="bi bi-search"></i> Анализировать текст
-                            </button>
+                        <div class="col-md-6">
+                            <button id="analyzeBtn" class="btn btn-primary btn-lg w-100" onclick="analyzeText()">Анализировать</button>
                         </div>
-                        <div class="col-md-4">
-                            <button class="btn btn-outline-secondary btn-lg w-100" onclick="clearText()">
-                                <i class="bi bi-trash"></i> Очистить
-                            </button>
+                        <div class="col-md-6">
+                            <button class="btn btn-outline-secondary btn-lg w-100" onclick="clearText()">Очистить</button>
                         </div>
                     </div>
                     
-                    <!-- Примеры -->
-                    <div class="accordion mb-4">
-                        <div class="accordion-item">
-                            <h2 class="accordion-header">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#examples">
-                                    <i class="bi bi-collection"></i> Примеры для тестирования
-                                </button>
-                            </h2>
-                            <div id="examples" class="accordion-collapse collapse">
-                                <div class="accordion-body">
-                                    <div class="row">
-                                        <div class="col-md-6 mb-3">
-                                            <div class="card h-100 border-danger">
-                                                <div class="card-header bg-danger text-white">
-                                                    <i class="bi bi-exclamation-triangle"></i> Фейковая новость
-                                                </div>
-                                                <div class="card-body">
-                                                    <p>ШОК! Ученые скрывают ПРАВДУ о вакцинах! Все врачи в УЖАСЕ! АБСОЛЮТНО точно!</p>
-                                                    <button class="btn btn-sm btn-outline-danger" onclick="useExample(this)">Использовать</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 mb-3">
-                                            <div class="card h-100 border-success">
-                                                <div class="card-header bg-success text-white">
-                                                    <i class="bi bi-check-circle"></i> Настоящая новость
-                                                </div>
-                                                <div class="card-body">
-                                                    <p>Центробанк сообщил об инфляции 4.2% за прошлый месяц. По данным экспертов, показатель соответствует прогнозам.</p>
-                                                    <button class="btn btn-sm btn-outline-success" onclick="useExample(this)">Использовать</button>
-                                                </div>
-                                            </div>
-                                        </div>
+                    <div class="mb-4">
+                        <h5>Примеры:</h5>
+                        <div class="row">
+                            <div class="col-md-6 mb-2">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <p class="mb-2"><small>Фейковая новость:</small><br>ШОК! Ученые скрывают ПРАВДУ о вакцинах!</p>
+                                        <button class="btn btn-sm btn-outline-danger" onclick="useExample(this)">Использовать</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <p class="mb-2"><small>Настоящая новость:</small><br>Центробанк сообщил об инфляции 4.2% за месяц.</p>
+                                        <button class="btn btn-sm btn-outline-success" onclick="useExample(this)">Использовать</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     
-                    <!-- Загрузка -->
                     <div id="loading" class="text-center d-none">
-                        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;"></div>
-                        <p class="mt-3">Анализируем текст...</p>
+                        <div class="spinner-border text-primary"></div>
+                        <p class="mt-2">Анализируем текст...</p>
                     </div>
                     
-                    <!-- Результаты -->
                     <div id="results" class="d-none">
-                        <!-- Оценка -->
-                        <div class="row mb-5">
+                        <div class="row mb-4">
                             <div class="col-md-8">
                                 <div class="card h-100">
-                                    <div class="card-header bg-light">
-                                        <h5 class="mb-0"><i class="bi bi-clipboard-data"></i> Результаты анализа</h5>
-                                    </div>
                                     <div class="card-body">
+                                        <h5>📋 Результаты анализа</h5>
                                         <div id="explanations"></div>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <div id="scoreCard" class="card h-100 result-card">
-                                    <div class="card-body text-center">
-                                        <h6 class="text-muted mb-3">ДОСТОВЕРНОСТЬ</h6>
+                                <div id="scoreCard" class="card h-100 text-center">
+                                    <div class="card-body">
+                                        <h6>ДОСТОВЕРНОСТЬ</h6>
                                         <div id="scoreDisplay" class="score-display mb-3">0%</div>
-                                        <div id="verdict" class="badge fs-5 p-3 mb-3">Не определено</div>
-                                        <div class="trust-meter">
-                                            <div id="trustIndicator" class="trust-indicator" style="left: 0%;"></div>
-                                        </div>
+                                        <div id="verdict" class="badge fs-5 p-3">Не определено</div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         
-                        <!-- Визуализация -->
-                        <div class="row mb-5">
-                            <div class="col-lg-6">
+                        <div class="row mb-4">
+                            <div class="col-md-6">
                                 <div class="card h-100">
-                                    <div class="card-header bg-light">
-                                        <h5 class="mb-0"><i class="bi bi-radar"></i> Радар-диаграмма</h5>
-                                    </div>
                                     <div class="card-body">
+                                        <h5>📊 Анализ признаков</h5>
                                         <canvas id="radarChart"></canvas>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-6">
+                            <div class="col-md-6">
                                 <div class="card h-100">
-                                    <div class="card-header bg-light">
-                                        <h5 class="mb-0"><i class="bi bi-highlighter"></i> Анализ текста</h5>
-                                    </div>
                                     <div class="card-body">
-                                        <div id="highlightedText" class="p-3 border rounded" style="height: 300px; overflow-y: auto;"></div>
+                                        <h5>🔍 Анализ текста</h5>
+                                        <div id="highlightedText" class="p-3 border rounded" style="height: 250px; overflow-y: auto;"></div>
                                         <div class="mt-3">
                                             <small class="text-muted">
                                                 <span class="badge clickbait me-2">Кликбейт</span>
@@ -273,29 +150,16 @@
     <script>
         let radarChart = null;
         
-        // Загрузка точности модели
-        fetch('/health')
-            .then(response => response.json())
-            .then(data => {
-                if (data.model_accuracy) {
-                    document.getElementById('modelAccuracyBadge').innerHTML = 
-                        `<i class="bi bi-check-circle"></i> Точность: ${Math.round(data.model_accuracy * 100)}%`;
-                }
-            });
-        
-        // Использование примера
         function useExample(button) {
-            const text = button.closest('.card-body').querySelector('p').textContent;
-            document.getElementById('textInput').value = text.trim();
+            const text = button.closest('.card-body').querySelector('p').textContent.split('\n')[1].trim();
+            document.getElementById('textInput').value = text;
         }
         
-        // Очистка
         function clearText() {
             document.getElementById('textInput').value = '';
             document.getElementById('results').classList.add('d-none');
         }
         
-        // Анализ
         async function analyzeText() {
             const text = document.getElementById('textInput').value.trim();
             
@@ -322,10 +186,6 @@
                 const result = await response.json();
                 
                 if (result.error) {
-                    if (result.retry) {
-                        setTimeout(() => analyzeText(), 2000);
-                        return;
-                    }
                     throw new Error(result.error);
                 }
                 
@@ -338,37 +198,33 @@
             }
         }
         
-        // Обновление интерфейса
         function updateUI(data) {
             document.getElementById('results').classList.remove('d-none');
             
-            // Балл
+            // Общий балл
             const score = data.reliability_score;
             const scoreElement = document.getElementById('scoreDisplay');
             const scoreCard = document.getElementById('scoreCard');
             const verdictElement = document.getElementById('verdict');
-            const trustIndicator = document.getElementById('trustIndicator');
             
             animateCounter(scoreElement, 0, score, 1000);
-            trustIndicator.style.left = score + '%';
             
-            let verdictText, verdictClass, cardClass;
+            let verdictText, verdictClass;
             
             if (score >= 75) {
                 verdictText = 'ВЫСОКАЯ ДОСТОВЕРНОСТЬ';
                 verdictClass = 'badge bg-success fs-5 p-3';
-                cardClass = 'result-real';
+                scoreCard.classList.add('border-success');
             } else if (score >= 50) {
                 verdictText = 'СРЕДНЯЯ ДОСТОВЕРНОСТЬ';
                 verdictClass = 'badge bg-warning text-dark fs-5 p-3';
-                cardClass = 'result-questionable';
+                scoreCard.classList.add('border-warning');
             } else {
                 verdictText = 'НИЗКАЯ ДОСТОВЕРНОСТЬ';
                 verdictClass = 'badge bg-danger fs-5 p-3';
-                cardClass = 'result-fake';
+                scoreCard.classList.add('border-danger');
             }
             
-            scoreCard.className = 'card h-100 result-card ' + cardClass;
             verdictElement.textContent = verdictText;
             verdictElement.className = verdictClass;
             
@@ -378,9 +234,9 @@
                 let html = '';
                 data.explanations.forEach(exp => {
                     if (exp.includes('⚠️') || exp.includes('😠') || exp.includes('❗')) {
-                        html += `<div class="alert alert-warning">${exp}</div>`;
+                        html += `<div class="alert alert-warning mb-2">${exp}</div>`;
                     } else {
-                        html += `<div class="alert alert-success">${exp}</div>`;
+                        html += `<div class="alert alert-success mb-2">${exp}</div>`;
                     }
                 });
                 explanationsElement.innerHTML = html;
@@ -393,7 +249,6 @@
             updateRadarChart(data.visualization_data);
         }
         
-        // Анимация счетчика
         function animateCounter(element, start, end, duration) {
             let startTimestamp = null;
             const step = (timestamp) => {
@@ -406,7 +261,6 @@
             window.requestAnimationFrame(step);
         }
         
-        // Обновление диаграммы
         function updateRadarChart(data) {
             const ctx = document.getElementById('radarChart').getContext('2d');
             
