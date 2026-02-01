@@ -42,14 +42,9 @@ env/
 ehthumbs.db
 Thumbs.db
 
-# Логи и данные
-*.log
-*.sqlite3
-*.db
-
-# Модели ML (НЕ добавляем в git!)
-models/
-!models/.gitkeep
+# Модели ML (можно добавить позже)
+# models/
+# !models/.gitkeep
 
 # Render
 .render/
