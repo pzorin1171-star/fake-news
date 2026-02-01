@@ -23,13 +23,13 @@
             font-weight: bold;
             margin: 0 1px;
         }
-        .clickbait { background-color: #ffcccc; color: #cc0000; }
-        .certainty { background-color: #fff0cc; color: #b35900; }
-        .source { background-color: #d4edda; color: #155724; }
-        .number { background-color: #d1ecf1; color: #0c5460; font-weight: bold; }
-        .exclamation { background-color: #ffebcc; color: #e68a00; }
-        .conspiracy { background-color: #ffccff; color: #990099; }
-        .pseudo { background-color: #ccffcc; color: #006600; border: 1px solid #006600; }
+        .clickbait { background-color: #ff6b6b; color: white; }
+        .certainty { background-color: #ffd93d; color: #333; }
+        .source { background-color: #6bcf7f; color: white; }
+        .number { background-color: #4d96ff; color: white; font-weight: bold; }
+        .exclamation { background-color: #ff9a3c; color: white; }
+        .conspiracy { background-color: #9d4edd; color: white; }
+        .pseudo { background-color: #ff6b9d; color: white; border: 1px solid #ff6b9d; }
         .score-display {
             font-size: 4rem;
             font-weight: 800;
@@ -62,11 +62,37 @@
         .alert-box {
             border-left: 5px solid;
             padding-left: 15px;
+            margin-bottom: 10px;
+            border-radius: 5px;
         }
-        .alert-warning { border-left-color: #ffc107; background-color: #fff3cd; }
-        .alert-success { border-left-color: #28a745; background-color: #d4edda; }
-        .alert-danger { border-left-color: #dc3545; background-color: #f8d7da; }
-        .alert-info { border-left-color: #17a2b8; background-color: #d1ecf1; }
+        .alert-warning { border-left-color: #ffc107; background-color: rgba(255, 193, 7, 0.1); }
+        .alert-success { border-left-color: #28a745; background-color: rgba(40, 167, 69, 0.1); }
+        .alert-danger { border-left-color: #dc3545; background-color: rgba(220, 53, 69, 0.1); }
+        .alert-info { border-left-color: #17a2b8; background-color: rgba(23, 162, 184, 0.1); }
+        .metric-badge {
+            font-size: 0.8rem;
+            padding: 3px 8px;
+            margin: 0 2px;
+        }
+        .chart-container {
+            height: 450px;
+            position: relative;
+        }
+        .metric-category {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 5px;
+        }
+        .risk-indicator {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 5px;
+        }
+        .risk-high { background-color: #dc3545; }
+        .risk-medium { background-color: #ffc107; }
+        .risk-low { background-color: #28a745; }
     </style>
 </head>
 <body>
@@ -87,42 +113,8 @@
                     <div class="mb-4">
                         <textarea id="textInput" class="form-control form-control-lg" 
                                   placeholder="Вставьте текст новости или статьи для проверки..."
-                                  rows="6">ШОКИРУЮЩЕЕ ОТКРЫТИЕ! ВАШ ТЕЛЕФОН ЦЕЛЕНАПРАВЛЕННО ДЕЛАЕТ ВАШИХ ДЕТЕЙ ГЛУПЫМИ И БЕЗНАДЁЖНЫМИ! ВИНОВАТ МЕГАКОРПОРАТИВНЫЙ ЗАГОВОР!
-ЭКСКЛЮЗИВ! Учёный-правдоруб, которого ЗАМАЛЧИВАЛИ, раскрыл страшную ПРАВДУ!
-
-Вы даже не подозреваете, какую ЧУДОВИЩНУЮ бомбу замедленного действия вы кладёте в карман своему ребёнку! Речь не о банальной «зависимости» — это программа ПОЛНОГО УНИЧТОЖЕНИЯ мыслительных способностей молодого поколения, и всё это — часть ГНУСНОГО плана глобалистов!
-
-ДОКЛАД ДОКТОРА ШТИРЛИЦА (псевдоним, имя изменено из-за угроз со стороны «сильных мира сего»):
-Проведя тайные исследования в своей лаборатории, наш бесстрашный герой обнаружил, что излучение смартфонов (особенно моделей популярной марки «FruitPhone») содержит особые «ТОКСИНЫ МЫШЛЕНИЯ». Эти невидимые волны буквально ВЫЖИГАЮТ нейроны, отвечающие за волю, креативность и критическое мышление!
-
-НЕВЕРОЯТНЫЕ, но ДОКАЗАННЫЕ ФАКТЫ:
-
-За первые 10 минут использования приложения «Тик-Ток» у ребёнка на 47% снижается способность к концентрации. Это НЕ случайность, а инженерный расчёт!
-
-Социальные сети ВНУШАЮТ подросткам мысль о бесполезности образования. Вы думаете, это мода? Это ЗЛОНАМЕРЕННОЕ программирование!
-
-Все популярные блогеры — АГЕНТЫ системы, получающие гигантские деньги за то, чтобы продвигать дегенеративный контент и отуплять массы!
-
-«Это не технология, это ОРУЖИЕ МАССОВОГО ПОРАБОЩЕНИЯ, — заявил доктор Штирлиц в своём подпольном интервью. — Цель — создать поколение покорных, тупых потребителей, которые не смогут задать ни одного вопроса власть имущим!»
-
-Кто стоит за этим АДСКИМ заговором?
-Наш источник, пожелавший остаться анонимным, указал на тайный альянс между кремниевой мафией, фармацевтическими гигантами (которым выгодны будущие пациенты с расстройствами психики) и мировым правительством. Данные ваших детей уже продаются, их будущее — ПРЕДРЕШЕНО!
-
-ЖУТКАЯ СТАТИСТИКА, которую от нас скрывают:
-В регионах, где дети не используют смартфоны до 14 лет, уровень гениальности выше на 300%! Но СМИ молчат, потому что они КУПЛЕНЫ!
-
-ЧТО ДЕЛАТЬ? СПАСИТЕ СВОИХ ДЕТЕЙ, ПОКА НЕ ПОЗДНО!
-
-НЕМЕДЛЕННО ВЫКИНЬТЕ смартфон ребёнка! Замените его на «умные» часы без экрана или кнопочный телефон.
-
-ТРЕБУЙТЕ в школе полного запрета гаджетов! Если директор отказывается — он либо дурак, либо СООБЩНИК.
-
-Распространите эту статью ВСЕМ своим знакомым! Каждый репост — это удар по системе! Не дайте себя ЗАГЛУШИТЬ!
-
-Купите наш патентованный «Нейро-щит» (специальная наклейка на телефон), который блокирует до 99% токсинов мышления!* Акция только эту неделю!
-
-ПРОСНИТЕСЬ! Они уже среди нас, они в вашем доме, в руках вашего ребёнка! Борьба за разум будущего поколения НАЧАЛАСЬ!</textarea>
-                        <div class="form-text mt-2">Пример текста уже загружен. Нажмите "Анализировать" или используйте Ctrl+Enter</div>
+                                  rows="6"></textarea>
+                        <div class="form-text mt-2">Загрузите новостную статью. Нажмите "Анализировать" или используйте Ctrl+Enter</div>
                     </div>
                     
                     <div class="row mb-4">
@@ -167,26 +159,6 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-md-6 mb-3">
-                                            <div class="card h-100 border-warning">
-                                                <div class="card-header bg-warning text-dark">Конспирологическая</div>
-                                                <div class="card-body">
-                                                    <p>Тайный заговор мирового правительства раскрыт! Глобалисты планируют чипирование через 5G сети. Наш источник в правительстве подтвердил.</p>
-                                                    <button class="btn btn-sm btn-outline-warning" onclick="useExample(this)">Использовать</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 mb-3">
-                                            <div class="card h-100 border-info">
-                                                <div class="card-header bg-info text-white">Нейтральная</div>
-                                                <div class="card-body">
-                                                    <p>Согласно исследованию ООН, уровень цифровой грамотности среди молодежи повысился на 15%. Эксперты отмечают позитивную динамику.</p>
-                                                    <button class="btn btn-sm btn-outline-info" onclick="useExample(this)">Использовать</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -201,7 +173,14 @@
                         <div class="row mb-5">
                             <div class="col-md-8">
                                 <div class="card h-100">
-                                    <div class="card-header bg-light"><h5 class="mb-0">📋 Объяснение оценки</h5></div>
+                                    <div class="card-header bg-light d-flex justify-content-between align-items-center">
+                                        <h5 class="mb-0">📋 Объяснение оценки</h5>
+                                        <div class="d-flex">
+                                            <span class="risk-indicator risk-high me-2" title="Высокий риск"></span>
+                                            <span class="risk-indicator risk-medium me-2" title="Средний риск"></span>
+                                            <span class="risk-indicator risk-low me-2" title="Низкий риск"></span>
+                                        </div>
+                                    </div>
                                     <div class="card-body">
                                         <div id="explanations"></div>
                                     </div>
@@ -218,16 +197,21 @@
                                             <div id="trustIndicator" class="trust-indicator" style="left: 0%;"></div>
                                         </div>
                                         <div class="d-flex justify-content-between small mt-1">
-                                            <span>Низкая</span>
-                                            <span>Высокая</span>
+                                            <span class="text-danger">Фейк</span>
+                                            <span class="text-success">Достоверно</span>
                                         </div>
                                         
                                         <div class="mt-4">
-                                            <small class="text-muted">
-                                                <div>Балл фейковости: <span id="fakeScore">0%</span></div>
-                                                <div>Слов: <span id="wordCount">0</span></div>
-                                                <div>Предложений: <span id="sentenceCount">0</span></div>
-                                            </small>
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <div class="small text-muted">Балл фейковости</div>
+                                                    <div class="h5" id="fakeScore">0%</div>
+                                                </div>
+                                                <div class="col-6">
+                                                    <div class="small text-muted">Слов/Предложений</div>
+                                                    <div class="h5"><span id="wordCount">0</span>/<span id="sentenceCount">0</span></div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -235,44 +219,76 @@
                         </div>
                         
                         <div class="row mb-5">
-                            <div class="col-lg-6">
-                                <div class="card h-100">
-                                    <div class="card-header bg-light"><h5 class="mb-0">📊 Анализ признаков</h5></div>
+                            <div class="col-lg-12">
+                                <div class="card">
+                                    <div class="card-header bg-light">
+                                        <h5 class="mb-0">📊 Детальный анализ признаков</h5>
+                                        <p class="mb-0 small text-muted">Чем выше показатель, тем больше вклад в общий балл фейковости</p>
+                                    </div>
                                     <div class="card-body">
-                                        <canvas id="radarChart"></canvas>
-                                        <div class="mt-3 small text-muted">
-                                            <div><span class="badge bg-danger me-1">Высокий риск</span> > 60%</div>
-                                            <div><span class="badge bg-warning me-1">Средний риск</span> 30-60%</div>
-                                            <div><span class="badge bg-success me-1">Низкий риск</span> < 30%</div>
+                                        <div class="chart-container">
+                                            <canvas id="barChart"></canvas>
+                                        </div>
+                                        <div class="row mt-4">
+                                            <div class="col-md-4">
+                                                <div class="card bg-light">
+                                                    <div class="card-body p-3">
+                                                        <h6 class="text-danger">🚨 ВЫСОКИЙ РИСК</h6>
+                                                        <p class="small mb-1">> 60% - сильное влияние на фейковость</p>
+                                                        <div id="highRiskMetrics" class="mt-2"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="card bg-light">
+                                                    <div class="card-body p-3">
+                                                        <h6 class="text-warning">⚠️ СРЕДНИЙ РИСК</h6>
+                                                        <p class="small mb-1">30-60% - умеренное влияние</p>
+                                                        <div id="mediumRiskMetrics" class="mt-2"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="card bg-light">
+                                                    <div class="card-body p-3">
+                                                        <h6 class="text-success">✅ НИЗКИЙ РИСК</h6>
+                                                        <p class="small mb-1">< 30% - слабое влияние</p>
+                                                        <div id="lowRiskMetrics" class="mt-2"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-6">
+                        </div>
+                        
+                        <div class="row mb-5">
+                            <div class="col-lg-12">
                                 <div class="card h-100">
                                     <div class="card-header bg-light d-flex justify-content-between align-items-center">
-                                        <h5 class="mb-0">🔍 Анализ текста</h5>
-                                        <div>
-                                            <small class="text-muted">
-                                                <span class="badge clickbait me-1">Кликбейт</span>
-                                                <span class="badge certainty me-1">Категорич.</span>
-                                                <span class="badge conspiracy me-1">Заговор</span>
-                                                <span class="badge pseudo me-1">Псевдонаука</span>
-                                            </small>
+                                        <h5 class="mb-0">🔍 Подсветка текста</h5>
+                                        <div class="d-flex flex-wrap">
+                                            <span class="badge clickbait metric-badge me-1 mb-1">Кликбейт</span>
+                                            <span class="badge certainty metric-badge me-1 mb-1">Категорич.</span>
+                                            <span class="badge conspiracy metric-badge me-1 mb-1">Заговор</span>
+                                            <span class="badge pseudo metric-badge me-1 mb-1">Псевдонаука</span>
+                                            <span class="badge source metric-badge me-1 mb-1">Источники</span>
+                                            <span class="badge number metric-badge me-1 mb-1">Числа</span>
+                                            <span class="badge exclamation metric-badge me-1 mb-1">!</span>
                                         </div>
                                     </div>
                                     <div class="card-body">
-                                        <div id="highlightedText" class="p-3 border rounded" style="height: 300px; overflow-y: auto; font-size: 1.1rem; line-height: 1.6;"></div>
+                                        <div id="highlightedText" class="p-3 border rounded bg-white" style="height: 300px; overflow-y: auto; font-size: 1.1rem; line-height: 1.6;"></div>
                                         <div class="mt-3">
-                                            <small class="text-muted">
-                                                <span class="badge clickbait me-2">Кликбейт</span>
-                                                <span class="badge certainty me-2">Категоричность</span>
-                                                <span class="badge conspiracy me-2">Заговор</span>
-                                                <span class="badge pseudo me-2">Псевдонаука</span>
-                                                <span class="badge source me-2">Источники</span>
-                                                <span class="badge number me-2">Числа</span>
-                                                <span class="badge exclamation me-2">Восклицания</span>
-                                            </small>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <small class="text-muted">🟥 <strong>Отрицательные признаки</strong> (увеличивают фейковость)</small>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <small class="text-muted">🟩 <strong>Положительные признаки</strong> (уменьшают фейковость)</small>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -315,7 +331,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     
     <script>
-        let radarChart = null;
+        let barChart = null;
         
         function useExample(button) {
             const text = button.closest('.card-body').querySelector('p').textContent;
@@ -409,6 +425,7 @@
             verdictElement.textContent = verdictText;
             verdictElement.className = verdictClass;
             
+            // Обновление объяснений
             const explanationsElement = document.getElementById('explanations');
             if (data.explanations && data.explanations.length > 0) {
                 let html = '';
@@ -417,24 +434,24 @@
                         exp.includes('🔠') || exp.includes('🕵️') || exp.includes('🔬') ||
                         exp.includes('📈') || exp.includes('👤')) {
                         if (exp.includes('🕵️') || exp.includes('🔬')) {
-                            html += `<div class="alert-box alert-danger mb-2">${exp}</div>`;
+                            html += `<div class="alert-box alert-danger">${exp}</div>`;
                         } else {
-                            html += `<div class="alert-box alert-warning mb-2">${exp}</div>`;
+                            html += `<div class="alert-box alert-warning">${exp}</div>`;
                         }
                     } else if (exp.includes('✅') || exp.includes('📊') || exp.includes('🏛️') || 
                               exp.includes('📝') || exp.includes('✅')) {
-                        html += `<div class="alert-box alert-success mb-2">${exp}</div>`;
+                        html += `<div class="alert-box alert-success">${exp}</div>`;
                     } else if (exp.includes('❌')) {
-                        html += `<div class="alert-box alert-danger mb-2">${exp}</div>`;
+                        html += `<div class="alert-box alert-danger">${exp}</div>`;
                     } else {
-                        html += `<div class="alert-box alert-info mb-2">${exp}</div>`;
+                        html += `<div class="alert-box alert-info">${exp}</div>`;
                     }
                 });
                 explanationsElement.innerHTML = html;
             }
             
             document.getElementById('highlightedText').innerHTML = data.highlighted_text;
-            updateRadarChart(data.metrics);
+            updateBarChart(data.metrics);
             
             // Прокрутка к результатам
             document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
@@ -452,58 +469,157 @@
             window.requestAnimationFrame(step);
         }
         
-        function updateRadarChart(metrics) {
-            const ctx = document.getElementById('radarChart').getContext('2d');
+        function updateBarChart(metrics) {
+            const ctx = document.getElementById('barChart').getContext('2d');
             
-            if (radarChart) radarChart.destroy();
+            if (barChart) barChart.destroy();
             
-            // Убедимся, что все метрики есть
-            const chartData = [
-                metrics.clickbait_score || 0,
-                metrics.emotional_score || 0,
-                metrics.conspiracy_score || 0,
-                metrics.pseudo_science_score || 0,
-                metrics.fake_stat_score || 0,
-                metrics.certainty_score || 0
+            // Группируем метрики по категориям
+            const categories = [
+                {
+                    name: 'Эмоциональные признаки',
+                    metrics: [
+                        { label: 'Кликбейт', value: metrics.clickbait_score, color: '#ff6b6b' },
+                        { label: 'Эмоциональность', value: metrics.emotional_score, color: '#ff9a3c' },
+                        { label: 'Категоричность', value: metrics.certainty_score, color: '#ffd93d' }
+                    ]
+                },
+                {
+                    name: 'Конспирология и псевдонаука',
+                    metrics: [
+                        { label: 'Конспирология', value: metrics.conspiracy_score, color: '#9d4edd' },
+                        { label: 'Псевдонаука', value: metrics.pseudo_science_score, color: '#ff6b9d' },
+                        { label: 'Фейк-статистика', value: metrics.fake_stat_score, color: '#ff9a76' }
+                    ]
+                },
+                {
+                    name: 'Стиль и оформление',
+                    metrics: [
+                        { label: 'Восклицания', value: metrics.exclamation_density, color: '#ff9a3c' },
+                        { label: 'Заглавные буквы', value: metrics.caps_ratio, color: '#ffd93d' }
+                    ]
+                },
+                {
+                    name: 'Источники информации',
+                    metrics: [
+                        { label: 'Формальность', value: metrics.formality_score, color: '#6bcf7f' },
+                        { label: 'Указание источников', value: metrics.source_score, color: '#4d96ff' },
+                        { label: 'Офиц. источники', value: metrics.news_source_score, color: '#6bcf7f' },
+                        { label: 'Анонимность', value: metrics.anonymous_score, color: '#ff6b6b' }
+                    ]
+                }
             ];
             
-            radarChart = new Chart(ctx, {
-                type: 'radar',
+            // Собираем все метрики для графика
+            const allLabels = [];
+            const allValues = [];
+            const allColors = [];
+            const allBackgroundColors = [];
+            
+            categories.forEach(category => {
+                category.metrics.forEach(metric => {
+                    allLabels.push(metric.label);
+                    allValues.push(metric.value);
+                    allColors.push(metric.color);
+                    
+                    // Определяем фон в зависимости от уровня риска
+                    let bgColor;
+                    if (['Формальность', 'Указание источников', 'Офиц. источники'].includes(metric.label)) {
+                        // Для позитивных метрик инвертируем цвета
+                        if (metric.value >= 60) bgColor = 'rgba(107, 207, 127, 0.7)'; // зеленый
+                        else if (metric.value >= 30) bgColor = 'rgba(255, 217, 61, 0.7)'; // желтый
+                        else bgColor = 'rgba(255, 107, 107, 0.7)'; // красный
+                    } else {
+                        // Для негативных метрик стандартные цвета
+                        if (metric.value >= 60) bgColor = 'rgba(255, 107, 107, 0.7)'; // красный
+                        else if (metric.value >= 30) bgColor = 'rgba(255, 217, 61, 0.7)'; // желтый
+                        else bgColor = 'rgba(107, 207, 127, 0.7)'; // зеленый
+                    }
+                    allBackgroundColors.push(bgColor);
+                });
+            });
+            
+            // Группируем метрики по уровню риска для боковых панелей
+            const highRisk = [];
+            const mediumRisk = [];
+            const lowRisk = [];
+            
+            categories.forEach(category => {
+                category.metrics.forEach(metric => {
+                    const isPositive = ['Формальность', 'Указание источников', 'Офиц. источники'].includes(metric.label);
+                    let riskLevel;
+                    
+                    if (isPositive) {
+                        // Для позитивных метрик: низкое значение = высокий риск
+                        if (metric.value < 30) riskLevel = 'high';
+                        else if (metric.value < 60) riskLevel = 'medium';
+                        else riskLevel = 'low';
+                    } else {
+                        // Для негативных метрик: высокое значение = высокий риск
+                        if (metric.value >= 60) riskLevel = 'high';
+                        else if (metric.value >= 30) riskLevel = 'medium';
+                        else riskLevel = 'low';
+                    }
+                    
+                    const item = `<div class="small mb-1">${metric.label}: ${metric.value}%</div>`;
+                    
+                    if (riskLevel === 'high') highRisk.push(item);
+                    else if (riskLevel === 'medium') mediumRisk.push(item);
+                    else lowRisk.push(item);
+                });
+            });
+            
+            // Обновляем боковые панели
+            document.getElementById('highRiskMetrics').innerHTML = highRisk.join('');
+            document.getElementById('mediumRiskMetrics').innerHTML = mediumRisk.join('');
+            document.getElementById('lowRiskMetrics').innerHTML = lowRisk.join('');
+            
+            barChart = new Chart(ctx, {
+                type: 'bar',
                 data: {
-                    labels: [
-                        'Кликбейт', 
-                        'Эмоциональность', 
-                        'Конспирология',
-                        'Псевдонаука',    
-                        'Статистика',
-                        'Категоричность'
-                    ],
+                    labels: allLabels,
                     datasets: [{
-                        label: 'Показатели риска (%)',
-                        data: chartData,
-                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                        borderColor: 'rgba(255, 99, 132, 1)',
-                        pointBackgroundColor: 'rgba(255, 99, 132, 1)',
-                        pointBorderColor: '#fff',
-                        pointHoverBackgroundColor: '#fff',
-                        pointHoverBorderColor: 'rgba(255, 99, 132, 1)'
+                        label: 'Уровень признака (%)',
+                        data: allValues,
+                        backgroundColor: allBackgroundColors,
+                        borderColor: allColors,
+                        borderWidth: 2,
+                        borderRadius: 5,
+                        hoverBackgroundColor: allColors
                     }]
                 },
                 options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    indexAxis: 'y',
                     scales: {
-                        r: {
-                            suggestedMin: 0,
-                            suggestedMax: 100,
-                            ticks: { 
-                                stepSize: 20,
+                        x: {
+                            beginAtZero: true,
+                            max: 100,
+                            ticks: {
                                 callback: function(value) {
                                     return value + '%';
-                                }
-                            },
-                            pointLabels: {
+                                },
+                                color: '#666',
                                 font: {
                                     size: 12
                                 }
+                            },
+                            grid: {
+                                color: 'rgba(0,0,0,0.05)'
+                            }
+                        },
+                        y: {
+                            ticks: {
+                                color: '#333',
+                                font: {
+                                    size: 13,
+                                    weight: 'bold'
+                                },
+                                padding: 10
+                            },
+                            grid: {
+                                display: false
                             }
                         }
                     },
@@ -514,10 +630,37 @@
                         tooltip: {
                             callbacks: {
                                 label: function(context) {
-                                    return context.label + ': ' + context.raw + '%';
+                                    const label = context.dataset.label || '';
+                                    const value = context.raw;
+                                    let category = '';
+                                    
+                                    // Определяем категорию для подсказки
+                                    categories.forEach(cat => {
+                                        if (cat.metrics.some(m => m.label === context.label)) {
+                                            category = cat.name;
+                                        }
+                                    });
+                                    
+                                    return [
+                                        `${context.label}: ${value}%`,
+                                        `Категория: ${category}`,
+                                        value >= 60 ? '🚨 Высокий уровень' : 
+                                        value >= 30 ? '⚠️ Средний уровень' : 
+                                        '✅ Низкий уровень'
+                                    ];
                                 }
-                            }
+                            },
+                            backgroundColor: 'rgba(255, 255, 255, 0.95)',
+                            titleColor: '#333',
+                            bodyColor: '#666',
+                            borderColor: '#ddd',
+                            borderWidth: 1,
+                            padding: 12
                         }
+                    },
+                    animation: {
+                        duration: 1000,
+                        easing: 'easeOutQuart'
                     }
                 }
             });
@@ -525,13 +668,12 @@
         
         // Автоматический анализ при загрузке страницы
         document.addEventListener('DOMContentLoaded', function() {
-            // Анализ через 1 секунду после загрузки
             setTimeout(() => {
                 const text = document.getElementById('textInput').value.trim();
                 if (text.length >= 20) {
                     analyzeText();
                 }
-            }, 1000);
+            }, 800);
         });
         
         // Горячие клавиши
