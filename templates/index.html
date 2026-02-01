@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Детектор фейковых новостей</title>
+    <title>Детектор фейковых новостей v2.0</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
@@ -15,17 +15,21 @@
         .card {
             border-radius: 15px;
             box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            border: none;
         }
         .highlight {
             padding: 2px 6px;
             border-radius: 4px;
             font-weight: bold;
+            margin: 0 1px;
         }
         .clickbait { background-color: #ffcccc; color: #cc0000; }
         .certainty { background-color: #fff0cc; color: #b35900; }
         .source { background-color: #d4edda; color: #155724; }
         .number { background-color: #d1ecf1; color: #0c5460; font-weight: bold; }
         .exclamation { background-color: #ffebcc; color: #e68a00; }
+        .conspiracy { background-color: #ffccff; color: #990099; }
+        .pseudo { background-color: #ccffcc; color: #006600; border: 1px solid #006600; }
         .score-display {
             font-size: 4rem;
             font-weight: 800;
@@ -55,17 +59,25 @@
             border-radius: 5px;
             transform: translateX(-50%);
         }
+        .alert-box {
+            border-left: 5px solid;
+            padding-left: 15px;
+        }
+        .alert-warning { border-left-color: #ffc107; background-color: #fff3cd; }
+        .alert-success { border-left-color: #28a745; background-color: #d4edda; }
+        .alert-danger { border-left-color: #dc3545; background-color: #f8d7da; }
+        .alert-info { border-left-color: #17a2b8; background-color: #d1ecf1; }
     </style>
 </head>
 <body>
     <div class="container py-5">
         <div class="row justify-content-center">
-            <div class="col-lg-10">
+            <div class="col-lg-12">
                 <div class="text-center mb-5">
-                    <h1 class="display-5 fw-bold text-white mb-3">🔍 Детектор фейковых новостей</h1>
-                    <p class="lead text-white">Анализ стилистических признаков текста</p>
+                    <h1 class="display-5 fw-bold text-white mb-3">🔍 Детектор фейковых новостей v2.0</h1>
+                    <p class="lead text-white">Улучшенный анализ стилистических признаков текста</p>
                     <span class="badge bg-light text-dark fs-6 p-3">
-                        Rule-based алгоритм • 15+ стилистических признаков
+                        Rule-based алгоритм • 25+ стилистических признаков • Конспирология
                     </span>
                 </div>
 
@@ -75,8 +87,42 @@
                     <div class="mb-4">
                         <textarea id="textInput" class="form-control form-control-lg" 
                                   placeholder="Вставьте текст новости или статьи для проверки..."
-                                  rows="6"></textarea>
-                        <div class="form-text mt-2">Совет: Используйте примеры ниже или вставьте любой текст</div>
+                                  rows="6">ШОКИРУЮЩЕЕ ОТКРЫТИЕ! ВАШ ТЕЛЕФОН ЦЕЛЕНАПРАВЛЕННО ДЕЛАЕТ ВАШИХ ДЕТЕЙ ГЛУПЫМИ И БЕЗНАДЁЖНЫМИ! ВИНОВАТ МЕГАКОРПОРАТИВНЫЙ ЗАГОВОР!
+ЭКСКЛЮЗИВ! Учёный-правдоруб, которого ЗАМАЛЧИВАЛИ, раскрыл страшную ПРАВДУ!
+
+Вы даже не подозреваете, какую ЧУДОВИЩНУЮ бомбу замедленного действия вы кладёте в карман своему ребёнку! Речь не о банальной «зависимости» — это программа ПОЛНОГО УНИЧТОЖЕНИЯ мыслительных способностей молодого поколения, и всё это — часть ГНУСНОГО плана глобалистов!
+
+ДОКЛАД ДОКТОРА ШТИРЛИЦА (псевдоним, имя изменено из-за угроз со стороны «сильных мира сего»):
+Проведя тайные исследования в своей лаборатории, наш бесстрашный герой обнаружил, что излучение смартфонов (особенно моделей популярной марки «FruitPhone») содержит особые «ТОКСИНЫ МЫШЛЕНИЯ». Эти невидимые волны буквально ВЫЖИГАЮТ нейроны, отвечающие за волю, креативность и критическое мышление!
+
+НЕВЕРОЯТНЫЕ, но ДОКАЗАННЫЕ ФАКТЫ:
+
+За первые 10 минут использования приложения «Тик-Ток» у ребёнка на 47% снижается способность к концентрации. Это НЕ случайность, а инженерный расчёт!
+
+Социальные сети ВНУШАЮТ подросткам мысль о бесполезности образования. Вы думаете, это мода? Это ЗЛОНАМЕРЕННОЕ программирование!
+
+Все популярные блогеры — АГЕНТЫ системы, получающие гигантские деньги за то, чтобы продвигать дегенеративный контент и отуплять массы!
+
+«Это не технология, это ОРУЖИЕ МАССОВОГО ПОРАБОЩЕНИЯ, — заявил доктор Штирлиц в своём подпольном интервью. — Цель — создать поколение покорных, тупых потребителей, которые не смогут задать ни одного вопроса власть имущим!»
+
+Кто стоит за этим АДСКИМ заговором?
+Наш источник, пожелавший остаться анонимным, указал на тайный альянс между кремниевой мафией, фармацевтическими гигантами (которым выгодны будущие пациенты с расстройствами психики) и мировым правительством. Данные ваших детей уже продаются, их будущее — ПРЕДРЕШЕНО!
+
+ЖУТКАЯ СТАТИСТИКА, которую от нас скрывают:
+В регионах, где дети не используют смартфоны до 14 лет, уровень гениальности выше на 300%! Но СМИ молчат, потому что они КУПЛЕНЫ!
+
+ЧТО ДЕЛАТЬ? СПАСИТЕ СВОИХ ДЕТЕЙ, ПОКА НЕ ПОЗДНО!
+
+НЕМЕДЛЕННО ВЫКИНЬТЕ смартфон ребёнка! Замените его на «умные» часы без экрана или кнопочный телефон.
+
+ТРЕБУЙТЕ в школе полного запрета гаджетов! Если директор отказывается — он либо дурак, либо СООБЩНИК.
+
+Распространите эту статью ВСЕМ своим знакомым! Каждый репост — это удар по системе! Не дайте себя ЗАГЛУШИТЬ!
+
+Купите наш патентованный «Нейро-щит» (специальная наклейка на телефон), который блокирует до 99% токсинов мышления!* Акция только эту неделю!
+
+ПРОСНИТЕСЬ! Они уже среди нас, они в вашем доме, в руках вашего ребёнка! Борьба за разум будущего поколения НАЧАЛАСЬ!</textarea>
+                        <div class="form-text mt-2">Пример текста уже загружен. Нажмите "Анализировать" или используйте Ctrl+Enter</div>
                     </div>
                     
                     <div class="row mb-4">
@@ -115,8 +161,28 @@
                                             <div class="card h-100 border-success">
                                                 <div class="card-header bg-success text-white">Настоящая новость</div>
                                                 <div class="card-body">
-                                                    <p>Центробанк сообщил об инфляции 4.2% за прошлый месяц. По данным экспертов, показатель соответствует прогнозам.</p>
+                                                    <p>Центробанк сообщил об инфляции 4.2% за прошлый месяц. По данным экспертов, показатель соответствует прогнозам. Минздрав отмечает стабильную эпидемиологическую ситуацию.</p>
                                                     <button class="btn btn-sm btn-outline-success" onclick="useExample(this)">Использовать</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <div class="card h-100 border-warning">
+                                                <div class="card-header bg-warning text-dark">Конспирологическая</div>
+                                                <div class="card-body">
+                                                    <p>Тайный заговор мирового правительства раскрыт! Глобалисты планируют чипирование через 5G сети. Наш источник в правительстве подтвердил.</p>
+                                                    <button class="btn btn-sm btn-outline-warning" onclick="useExample(this)">Использовать</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <div class="card h-100 border-info">
+                                                <div class="card-header bg-info text-white">Нейтральная</div>
+                                                <div class="card-body">
+                                                    <p>Согласно исследованию ООН, уровень цифровой грамотности среди молодежи повысился на 15%. Эксперты отмечают позитивную динамику.</p>
+                                                    <button class="btn btn-sm btn-outline-info" onclick="useExample(this)">Использовать</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -135,8 +201,10 @@
                         <div class="row mb-5">
                             <div class="col-md-8">
                                 <div class="card h-100">
-                                    <div class="card-header bg-light"><h5 class="mb-0">📋 Результаты анализа</h5></div>
-                                    <div class="card-body"><div id="explanations"></div></div>
+                                    <div class="card-header bg-light"><h5 class="mb-0">📋 Объяснение оценки</h5></div>
+                                    <div class="card-body">
+                                        <div id="explanations"></div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -148,6 +216,10 @@
                                         
                                         <div class="trust-meter">
                                             <div id="trustIndicator" class="trust-indicator" style="left: 0%;"></div>
+                                        </div>
+                                        <div class="d-flex justify-content-between small mt-1">
+                                            <span>Низкая</span>
+                                            <span>Высокая</span>
                                         </div>
                                         
                                         <div class="mt-4">
@@ -166,18 +238,37 @@
                             <div class="col-lg-6">
                                 <div class="card h-100">
                                     <div class="card-header bg-light"><h5 class="mb-0">📊 Анализ признаков</h5></div>
-                                    <div class="card-body"><canvas id="radarChart"></canvas></div>
+                                    <div class="card-body">
+                                        <canvas id="radarChart"></canvas>
+                                        <div class="mt-3 small text-muted">
+                                            <div><span class="badge bg-danger me-1">Высокий риск</span> > 60%</div>
+                                            <div><span class="badge bg-warning me-1">Средний риск</span> 30-60%</div>
+                                            <div><span class="badge bg-success me-1">Низкий риск</span> < 30%</div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="card h-100">
-                                    <div class="card-header bg-light"><h5 class="mb-0">🔍 Анализ текста</h5></div>
+                                    <div class="card-header bg-light d-flex justify-content-between align-items-center">
+                                        <h5 class="mb-0">🔍 Анализ текста</h5>
+                                        <div>
+                                            <small class="text-muted">
+                                                <span class="badge clickbait me-1">Кликбейт</span>
+                                                <span class="badge certainty me-1">Категорич.</span>
+                                                <span class="badge conspiracy me-1">Заговор</span>
+                                                <span class="badge pseudo me-1">Псевдонаука</span>
+                                            </small>
+                                        </div>
+                                    </div>
                                     <div class="card-body">
                                         <div id="highlightedText" class="p-3 border rounded" style="height: 300px; overflow-y: auto; font-size: 1.1rem; line-height: 1.6;"></div>
                                         <div class="mt-3">
                                             <small class="text-muted">
                                                 <span class="badge clickbait me-2">Кликбейт</span>
                                                 <span class="badge certainty me-2">Категоричность</span>
+                                                <span class="badge conspiracy me-2">Заговор</span>
+                                                <span class="badge pseudo me-2">Псевдонаука</span>
                                                 <span class="badge source me-2">Источники</span>
                                                 <span class="badge number me-2">Числа</span>
                                                 <span class="badge exclamation me-2">Восклицания</span>
@@ -191,28 +282,30 @@
                 </div>
                 
                 <div class="card p-4 mt-4">
-                    <h5>📚 Как работает детектор?</h5>
+                    <h5>📚 Как работает детектор v2.0?</h5>
                     <div class="row">
                         <div class="col-md-6">
                             <ul>
-                                <li><strong>Rule-based анализ</strong> - поиск стилистических маркеров</li>
-                                <li><strong>Эмоциональность</strong> - анализ тональности текста</li>
-                                <li><strong>Кликбейт-слова</strong> - слова для привлечения внимания</li>
-                                <li><strong>Категоричность</strong> - слишком уверенные утверждения</li>
+                                <li><strong>Rule-based анализ</strong> - поиск 25+ стилистических маркеров</li>
+                                <li><strong>Эмоциональность</strong> - анализ тональности текста (TextBlob)</li>
+                                <li><strong>Кликбейт-слова</strong> - 20+ слов для привлечения внимания</li>
+                                <li><strong>Конспирология</strong> - обнаружение теорий заговора</li>
+                                <li><strong>Псевдонаука</strong> - выявление лженаучных утверждений</li>
                             </ul>
                         </div>
                         <div class="col-md-6">
                             <ul>
                                 <li><strong>Формальность</strong> - официальность стиля изложения</li>
-                                <li><strong>Источники</strong> - упоминание источников информации</li>
-                                <li><strong>Статистика</strong> - длина, пунктуация, регистр</li>
-                                <li><strong>Объяснимость</strong> - подробный отчет о причинах оценки</li>
+                                <li><strong>Источники</strong> - анализ ссылок на источники</li>
+                                <li><strong>Анонимность</strong> - проверка на анонимные источники</li>
+                                <li><strong>Статистика</strong> - анализ цифр и процентов</li>
+                                <li><strong>Пунктуация</strong> - восклицания, заглавные буквы</li>
                             </ul>
                         </div>
                     </div>
-                    <div class="alert alert-info mt-3">
+                    <div class="alert alert-warning mt-3">
                         <strong>Важно:</strong> Данный инструмент анализирует <strong>стилистические признаки</strong>, а не факты. 
-                        Всегда проверяйте информацию в надежных источниках.
+                        Всегда проверяйте информацию в надежных источниках. Алгоритм улучшен для выявления конспирологии и псевдонауки.
                     </div>
                 </div>
             </div>
@@ -247,6 +340,11 @@
                 return;
             }
             
+            if (text.length > 5000) {
+                alert('Текст слишком длинный. Максимум 5000 символов.');
+                return;
+            }
+            
             document.getElementById('loading').classList.remove('d-none');
             document.getElementById('results').classList.add('d-none');
             
@@ -267,6 +365,7 @@
                 
             } catch (error) {
                 alert('Ошибка: ' + error.message);
+                console.error('Analysis error:', error);
             } finally {
                 document.getElementById('loading').classList.add('d-none');
             }
@@ -290,17 +389,20 @@
             
             let verdictText, verdictClass;
             
-            if (score >= 75) {
+            if (score >= 80) {
                 verdictText = data.verdict;
                 verdictClass = 'badge badge-lg bg-success';
+                scoreCard.classList.remove('border-warning', 'border-danger');
                 scoreCard.classList.add('border-success');
-            } else if (score >= 50) {
+            } else if (score >= 60) {
                 verdictText = data.verdict;
                 verdictClass = 'badge badge-lg bg-warning text-dark';
+                scoreCard.classList.remove('border-success', 'border-danger');
                 scoreCard.classList.add('border-warning');
             } else {
                 verdictText = data.verdict;
                 verdictClass = 'badge badge-lg bg-danger';
+                scoreCard.classList.remove('border-success', 'border-warning');
                 scoreCard.classList.add('border-danger');
             }
             
@@ -311,12 +413,21 @@
             if (data.explanations && data.explanations.length > 0) {
                 let html = '';
                 data.explanations.forEach(exp => {
-                    if (exp.includes('⚠️') || exp.includes('😠') || exp.includes('❗') || exp.includes('🔠')) {
-                        html += `<div class="alert alert-warning mb-2">${exp}</div>`;
-                    } else if (exp.includes('✅') || exp.includes('📊') || exp.includes('🏛️') || exp.includes('📝')) {
-                        html += `<div class="alert alert-success mb-2">${exp}</div>`;
+                    if (exp.includes('⚠️') || exp.includes('😠') || exp.includes('❗') || 
+                        exp.includes('🔠') || exp.includes('🕵️') || exp.includes('🔬') ||
+                        exp.includes('📈') || exp.includes('👤')) {
+                        if (exp.includes('🕵️') || exp.includes('🔬')) {
+                            html += `<div class="alert-box alert-danger mb-2">${exp}</div>`;
+                        } else {
+                            html += `<div class="alert-box alert-warning mb-2">${exp}</div>`;
+                        }
+                    } else if (exp.includes('✅') || exp.includes('📊') || exp.includes('🏛️') || 
+                              exp.includes('📝') || exp.includes('✅')) {
+                        html += `<div class="alert-box alert-success mb-2">${exp}</div>`;
+                    } else if (exp.includes('❌')) {
+                        html += `<div class="alert-box alert-danger mb-2">${exp}</div>`;
                     } else {
-                        html += `<div class="alert alert-info mb-2">${exp}</div>`;
+                        html += `<div class="alert-box alert-info mb-2">${exp}</div>`;
                     }
                 });
                 explanationsElement.innerHTML = html;
@@ -324,6 +435,9 @@
             
             document.getElementById('highlightedText').innerHTML = data.highlighted_text;
             updateRadarChart(data.metrics);
+            
+            // Прокрутка к результатам
+            document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
         }
         
         function animateCounter(element, start, end, duration) {
@@ -343,23 +457,36 @@
             
             if (radarChart) radarChart.destroy();
             
+            // Убедимся, что все метрики есть
+            const chartData = [
+                metrics.clickbait_score || 0,
+                metrics.emotional_score || 0,
+                metrics.conspiracy_score || 0,
+                metrics.pseudo_science_score || 0,
+                metrics.fake_stat_score || 0,
+                metrics.certainty_score || 0
+            ];
+            
             radarChart = new Chart(ctx, {
                 type: 'radar',
                 data: {
-                    labels: ['Кликбейт', 'Эмоциональность', 'Категоричность', 'Формальность', 'Источники', 'Восклицания'],
+                    labels: [
+                        'Кликбейт', 
+                        'Эмоциональность', 
+                        'Конспирология',
+                        'Псевдонаука',    
+                        'Статистика',
+                        'Категоричность'
+                    ],
                     datasets: [{
-                        label: 'Показатели (%)',
-                        data: [
-                            metrics.clickbait_score,
-                            metrics.emotional_score,
-                            metrics.certainty_score,
-                            metrics.formality_score,
-                            metrics.source_score,
-                            metrics.exclamation_density
-                        ],
-                        backgroundColor: 'rgba(102, 126, 234, 0.2)',
-                        borderColor: 'rgba(102, 126, 234, 1)',
-                        pointBackgroundColor: 'rgba(102, 126, 234, 1)'
+                        label: 'Показатели риска (%)',
+                        data: chartData,
+                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        pointBackgroundColor: 'rgba(255, 99, 132, 1)',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: 'rgba(255, 99, 132, 1)'
                     }]
                 },
                 options: {
@@ -367,13 +494,47 @@
                         r: {
                             suggestedMin: 0,
                             suggestedMax: 100,
-                            ticks: { stepSize: 20 }
+                            ticks: { 
+                                stepSize: 20,
+                                callback: function(value) {
+                                    return value + '%';
+                                }
+                            },
+                            pointLabels: {
+                                font: {
+                                    size: 12
+                                }
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.label + ': ' + context.raw + '%';
+                                }
+                            }
                         }
                     }
                 }
             });
         }
         
+        // Автоматический анализ при загрузке страницы
+        document.addEventListener('DOMContentLoaded', function() {
+            // Анализ через 1 секунду после загрузки
+            setTimeout(() => {
+                const text = document.getElementById('textInput').value.trim();
+                if (text.length >= 20) {
+                    analyzeText();
+                }
+            }, 1000);
+        });
+        
+        // Горячие клавиши
         document.getElementById('textInput').addEventListener('keydown', function(e) {
             if (e.ctrlKey && e.key === 'Enter') {
                 e.preventDefault();
