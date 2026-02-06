@@ -1,4 +1,16 @@
+# Основные зависимости
 Flask==2.3.3
-textblob==0.17.1
 gunicorn==21.2.0
+
+# Для rule-based анализа
+textblob==0.17.1
 nltk==3.8.1
+numpy==1.24.3
+
+# Для упрощенной ML модели
+scikit-learn==1.3.0
+pandas==2.0.3
+joblib==1.3.2
+
+# Для подготовки данных (опционально)
+python-dotenv==1.0.0
